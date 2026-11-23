@@ -54,7 +54,7 @@ dotnet build src/IcedPicViewer.WinUI/IcedPicViewer.csproj -c Debug -p:Platform=$
 - 目标框架 **`net11.0-windows10.0.26100.0`**（SDK 版本由仓库根 `global.json` 固定）。**不要**给 `Microsoft.Extensions.Caching.Abstractions` / `Configuration.Abstractions` / `DependencyInjection.Abstractions` / `Diagnostics.Abstractions` / `FileProviders.Abstractions` / `Hosting.Abstractions` / `Logging.Abstractions` / `Options` / `Primitives` 加 `PackageReference`——.NET 11 起这 9 个已在共享框架内，显式引用会 `NU1510`，且版本错配会在运行期抛 `MissingMethodException`。`Microsoft.Extensions.Hosting` 仍需显式引用，版本必须与共享框架同号（当前 `11.0.0`，GA）。
 - 部署目录里的 `IcedPicViewer.exe` 可以直接双击启动；Debug 用 `tools/run-debug.ps1`，发布用 `run-release.ps1`。
 - 平台固定 **x64**（`Platform=x64`）；solution 里 WinUI 仅映射 x64。
-- **发布 = `run-release.ps1`**：Release 构建 → 复制到 `%USERPROFILE%\App\IcedPicViewer`（保留 `Data`）→ 开始菜单快捷方式 → 启动。不做 MSIX 打包。
+- **发布 = `run-release.ps1`**：Release 构建 → 复制到 `SavorBox\App\IcedPicViewer`（保留 `Data`）→ 开始菜单快捷方式 → 启动。不做 MSIX 打包。
 - 窗口标题/关于页统一显示 `v<Version> · <Debug|Release> · <短哈希> · <yyyy-MM-dd HH:mm>`；由 `BuildInfo.cs` 从程序集元数据读取，两项目同形，不要手写字符串。
 
 #### 数据与持久化
@@ -75,7 +75,7 @@ dotnet test IcedPicViewer.slnx -c Debug
 ### UI 验证（MCP 驱动真实窗口）
 
 工具与通用用法见全局 AGENTS「UI 自动化（win MCP）」。本项目特有：
-- 启动走 `./tools/run-release.ps1`（部署到 `%USERPROFILE%\App\IcedPicViewer`）；窗口标题格式 `vX.Y.Z · Debug|Release · 短哈希 · yyyy-MM-dd HH:mm`，可据此确认驱动的是当次构建；
+- 启动走 `./tools/run-release.ps1`（部署到 `SavorBox\App\IcedPicViewer`）；窗口标题格式 `vX.Y.Z · Debug|Release · 短哈希 · yyyy-MM-dd HH:mm`，可据此确认驱动的是当次构建；
 - 「打开文件夹」选择器可纯键盘驱动：Alt+D → 剪贴板粘贴路径 → Enter → 「Select Image Folder」按钮；
 - 查看器 / 图库关键路径（翻页、箭头显隐、加载耗时）优先自己截图验证，再请用户确认体感。
 

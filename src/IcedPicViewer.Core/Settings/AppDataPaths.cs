@@ -11,7 +11,7 @@ namespace IcedPicViewer.Core.Settings;
 ///
 /// State lives next to the executable under <c>Data\</c>, so the whole
 /// application folder is portable: copy it (or deploy it to
-/// <c>%USERPROFILE%\App\IcedPicViewer</c>) and the settings travel with it.
+/// <c>SavorBox\App\IcedPicViewer</c>) and the settings travel with it.
 /// Set <c>IPV_DATA_DIR</c> to override the location (tests, temporary runs).
 /// Resolved once per process, so callers can treat <see cref="Root"/> as a
 /// constant.

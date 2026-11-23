@@ -86,7 +86,7 @@ dotnet test tests/IcedPicViewer.Core.Tests/IcedPicViewer.Core.Tests.csproj -c De
 # Debug：构建并启动（等价于 dotnet run ... -c Debug -p:Platform=x64）
 ./tools/run-debug.ps1
 
-# Release：构建 → 部署到 %USERPROFILE%\App\IcedPicViewer → 建开始菜单快捷方式 → 启动
+# Release：构建 → 部署到 <SavorBox>\App\IcedPicViewer → 建开始菜单快捷方式 → 启动
 ./run-release.bat            # 或 ./tools/run-release.ps1
 ./tools/run-release.ps1 -NoLaunch   # 只构建/部署，不启动
 ```
@@ -94,7 +94,7 @@ dotnet test tests/IcedPicViewer.Core.Tests/IcedPicViewer.Core.Tests.csproj -c De
 前置：.NET 11 runtime + **Windows App Runtime 2.7**。应用是 unpackaged，不需要开发者模式或包身份。
 
 - `-p:Platform=x64` **不可省略**：该工程只支持 x64，默认 `AnyCPU` 会失败。
-- Release 输出会复制到 `%USERPROFILE%\App\IcedPicViewer`；复制时保留该目录下已有的 `Data`。
+- Release 输出会复制到 `<SavorBox>\App\IcedPicViewer`；复制时保留该目录下已有的 `Data`。
 - 部署目录里的 `IcedPicViewer.exe` 可以直接双击启动；数据写在 exe 旁的 `Data\`。
 
 #### Debug vs Release

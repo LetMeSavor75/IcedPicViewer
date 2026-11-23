@@ -235,7 +235,7 @@
       - `dotnet build -c Debug -p:Platform=x64` produces the layout at
         bin\$(Platform)\$(Configuration)\$(TargetFramework)\$(RuntimeIdentifier)\
       - `dotnet run` launches that exe directly (no package registration).
-      - Release deployment copies the same layout to %USERPROFILE%\App\IcedPicViewer
+      - Release deployment copies the same layout to <SavorBox>\App\IcedPicViewer
         and creates a Start Menu shortcut; see tools/run-release.ps1.
   -->
   <PropertyGroup>

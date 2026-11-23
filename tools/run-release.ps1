@@ -1,14 +1,14 @@
 #Requires -Version 5.1
 <#
 .SYNOPSIS
-    Build IcedPicViewer in Release, deploy it to %USERPROFILE%\App\IcedPicViewer,
+    Build IcedPicViewer in Release, deploy it to <SavorBox>\App\IcedPicViewer,
     create/update the Start Menu shortcut, and launch it.
 
 .DESCRIPTION
     Same pipeline as SavorReader's run-release.ps1:
       1. dotnet build -c Release -p:Platform=x64 --no-incremental
       2. copy src\IcedPicViewer.WinUI\bin\x64\Release\<tfm>\win-x64 to
-         %USERPROFILE%\App\IcedPicViewer, preserving the user's Data folder
+         <SavorBox>\App\IcedPicViewer, preserving the user's Data folder
       3. create/update %APPDATA%\Microsoft\Windows\Start Menu\Programs\IcedPicViewer.lnk
       4. start the deployed exe
 
@@ -33,7 +33,11 @@ $project = Join-Path $root 'src\IcedPicViewer.WinUI\IcedPicViewer.csproj'
 $tfm = 'net11.0-windows10.0.26100.0'
 $rid = 'win-x64'
 $output = Join-Path $root "src\IcedPicViewer.WinUI\bin\x64\Release\$tfm\$rid"
-$destination = Join-Path $env:USERPROFILE 'App\IcedPicViewer'
+# Repo lives at <SavorBox>\Src\IcedPicViewer; keep releases beside the other
+# SavorBox apps (<SavorBox>\App\<app>) and derive the root instead of hardcoding
+# a user path.
+$savorBoxRoot = Split-Path -Parent (Split-Path -Parent $root)
+$destination = Join-Path $savorBoxRoot 'App\IcedPicViewer'
 $running = Get-Process -Name IcedPicViewer -ErrorAction SilentlyContinue
 
 if ($running) {
